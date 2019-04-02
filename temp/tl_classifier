@@ -1,0 +1,184 @@
+from styx_msgs.msg import TrafficLight
+import numpy as np
+import os
+import sys
+import tensorflow as tf
+import time
+import rospy
+
+from collections import defaultdict
+from io import StringIO
+#from matplotlib import pyplot as plt
+from PIL import Image
+from glob import glob
+
+def load_image_into_numpy_array(image):
+  (im_width, im_height) = image.size
+  return np.array(image.getdata()).reshape(
+      (im_height, im_width, 3)).astype(np.uint8)
+
+class TLClassifier(object):
+    def __init__(self):
+        #TODO load classifier
+        self.light = TrafficLight.UNKNOWN
+        #ssd_inception_v2 = 'model/frozen_inference_graph.pb'
+        #ssd_inception_v2 = './model/frozen_inference_graph.pb'
+        ssd_inception_v2 = './light_classification/model/frozen_inference_graph.pb'
+        NUM_CLASSES = 4
+
+        self.detection_graph = tf.Graph()
+
+        with self.detection_graph.as_default():
+    
+            od_graph_def = tf.GraphDef()
+
+            with tf.gfile.GFile(ssd_inception_v2, 'rb') as fid:
+            
+                serialized_graph = fid.read()
+                od_graph_def.ParseFromString(serialized_graph)
+                tf.import_graph_def(od_graph_def, name='')
+
+        with self.detection_graph.as_default():
+            #with tf.Session(graph=self.detection_graph) as sess:
+            self.sess = tf.Session(graph=self.detection_graph) 
+
+                # Definite input and output Tensors for detection_graph
+        self.image_tensor = self.detection_graph.get_tensor_by_name('image_tensor:0')
+                
+                # Each box represents a part of the image where a particular object was detected.
+        self.detection_boxes = self.detection_graph.get_tensor_by_name('detection_boxes:0')
+                
+                # Each score represent how level of confidence for each of the objects.
+                # Score is shown on the result image, together with the class label.
+        self.detection_scores = self.detection_graph.get_tensor_by_name('detection_scores:0')
+        self.detection_classes = self.detection_graph.get_tensor_by_name('detection_classes:0')
+        self.num_detections = self.detection_graph.get_tensor_by_name('num_detections:0')
+        
+        print("Whole model loaded")
+
+        #PATH_TO_TEST_IMAGES_DIR = 'sample'
+
+        #image_path = 'sample/left0011.jpg'
+
+        #print(os.path.join(PATH_TO_TEST_IMAGES_DIR, '*.jpg'))
+        #TEST_IMAGE_PATHS = glob(os.path.join(PATH_TO_TEST_IMAGES_DIR, '*.jpg'))
+        #print("Length of test images:", len(TEST_IMAGE_PATHS))
+
+        # Size, in inches, of the output images.
+        #IMAGE_SIZE = (12, 8)
+
+        #image = Image.open(image_path)
+
+    def load_image_into_numpy_array(self,image):
+        (im_width, im_height) = image.size
+        return np.array(image.getdata()).reshape((im_height, im_width, 3)).astype(np.uint8)
+        #pass
+
+
+        # Testing Testing 
+    def get_classification99(self, image):
+    	return 99
+    	#image_np_expanded = np.expand_dims(image, axis=0)
+    	#return image_np_expanded.size
+
+    	#return TrafficLight.UNKNOWN
+
+    def get_classification(self, image):
+        """Determines the color of the traffic light in the image
+
+        Args:
+            image (cv::Mat): image containing the traffic light
+
+        Returns:
+            int: ID of traffic light color (specified in styx_msgs/TrafficLight)
+
+        """
+        #TODO implement light color prediction
+
+
+        out_class = TrafficLight.UNKNOWN
+
+
+                #if image != None:
+                #if 1==1:
+                    #for image_path in TEST_IMAGE_PATHS:
+                    #image = Image.open(image_path)
+                    # the array based representation of the image will be used later in order to prepare the
+                    # result image with boxes and labels on it.
+
+
+                    #image_np = load_image_into_numpy_array(image)
+                
+                    # Expand dimensions since the model expects images to have shape: [1, None, None, 3]
+
+                    #image_np_expanded = np.expand_dims(image_np, axis=0)
+
+        image_np_expanded = np.expand_dims(image, axis=0)
+
+                    # Actual detection.
+        with self.detection_graph.as_default():
+
+            (boxes, scores, classes, num) = self.sess.run([self.detection_boxes, self.detection_scores, self.detection_classes, self.num_detections], feed_dict={self.image_tensor: image_np_expanded})
+        boxes = np.squeeze(boxes)
+        scores = np.squeeze(scores)
+        classes = np.squeeze(classes).astype(np.int32)
+    
+                    
+                    # 50% threshold for significance of detection
+        min_score_thresh = 0.5
+                    #print(classes)
+                    
+        class_list = []
+                    
+        for i in range(boxes.shape[0]):
+            #if scores is None or scores[i] > min_score_thresh:
+            if scores[i] > min_score_thresh:
+
+        
+                #class_name = category_index[classes[i]]['name']
+                            #print('{}'.format(class_name), scores[i])
+                class_list.append(classes[i])
+                    #print(class_list)
+                    #print(3 in class_list)
+                    #print(4 in class_list)
+                
+                    # ADD SUPPORT for empty class_list
+                    # ValueError: max() arg is an empty sequence
+        class_list_mode = None
+        if class_list:
+            class_list_mode = (max(set(class_list), key=class_list.count))
+            if (class_list_mode == 2):
+                self.light = TrafficLight.RED
+                out_class = TrafficLight.RED
+                            #print("RED")
+            elif (class_list_mode == 1):
+                self.light = TrafficLight.GREEN
+                out_class = TrafficLight.GREEN
+            elif (class_list_mode == 3):
+                self.light = TrafficLight.YELLOW
+                out_class = TrafficLight.YELLOW
+            else:
+                self.light = TrafficLight.UNKNOWN
+                out_class = TrafficLight.UNKNOWN
+        
+        
+        #return TrafficLight.UNKNOWN
+        #return out_class
+        #return image_np_expanded.size
+        #return class_list
+        #return scores
+        #return classes
+        #return class_list_mode
+        #return class_list
+        #return boxes.shape[0]
+        #return class_list_mode
+        #return out_class
+        #return classes
+        #return [scores, class_list_mode]
+        #return class_list_mode
+        #return [class_list_mode, scores]
+        #return [out_class, scores]
+        return out_class
+        #return class_list
+
+        #return image.size
