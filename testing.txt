@@ -1,3 +1,8 @@
+wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1nX9o66ok28PXtBe-hj7rUTl81fbgmtBn' -O FILENAME
+
+https://drive.google.com/file/d/1nX9o66ok28PXtBe-hj7rUTl81fbgmtBn/view?usp=sharing
+
+
 /opt/conda/lib/python3.6/site-packages
 /opt/conda/lib/python3.6/site-packages/tensorflow/contrib/quantization/
 echo $PYTHONPATH
