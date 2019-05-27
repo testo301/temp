@@ -3,6 +3,10 @@ python models/research/object_detection/train.py --logtostderr --train_dir=model
 
 python models/research/object_detection/export_inference_graph.py --input_type image_tensor --pipeline_config_path models/research/object_detection/models/ssd_mobilenet_v1_coco_2018_01_28/pipeline26.config --trained_checkpoint_prefix models/research/object_detection/models/model.ckpt-2000 --output_directory models/research/object_detection/models/mobilenet_export26carla
 
+https://drive.google.com/file/d/1ruS0AdZqw-OBh37XahGKJmcbpL1Q0fD4/view?usp=sharing
+wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1ruS0AdZqw-OBh37XahGKJmcbpL1Q0fD4' -O FILENAME
+
+
 
 
 https://drive.google.com/file/d/1TUgy4QRzBFQ7EF6c-RFAUKOZ-4rdz9C1/view?usp=sharing
