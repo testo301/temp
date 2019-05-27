@@ -1,3 +1,5 @@
+https://drive.google.com/file/d/1bV49N-_Iqv2IeMT7oNO3qnpZ2vFL6FlA/view?usp=sharing
+
 # Additional # 26th - training on the my annotated datasample
 python models/research/object_detection/train.py --logtostderr --train_dir=models/research/object_detection/models/ --pipeline_config_path=models/research/object_detection/models/ssd_mobilenet_v1_coco_2018_01_28/pipeline26.config
 
