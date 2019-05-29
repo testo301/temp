@@ -1,3 +1,10 @@
+https://drive.google.com/file/d/1D1T8UXnJNHpuec2ntyj5S6xLaUVsP5nq/view?usp=sharing
+
+wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1D1T8UXnJNHpuec2ntyj5S6xLaUVsP5nq' -O FILENAME
+
+
+
+
 https://drive.google.com/file/d/1kSEo3olEpj9YUM-ACoE-lf-5bbwb5paV/view?usp=sharing
 wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1kSEo3olEpj9YUM-ACoE-lf-5bbwb5paV' -O FILENAME
 
