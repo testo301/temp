@@ -1,5 +1,25 @@
+wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1pMozr5tb7VE-l4TPp2-GWjwP6Id3_tbT' -O FILENAME
+
+https://drive.google.com/file/d/1pMozr5tb7VE-l4TPp2-GWjwP6Id3_tbT/view?usp=sharing
+
+
+https://drive.google.com/file/d/1crcnq3EtlFU8hQRaJDhL9gndVCUkB39q/view?usp=sharing
+
+
+https://drive.google.com/file/d/1crcnq3EtlFU8hQRaJDhL9gndVCUkB39q/view?usp=sharing
+
+
+https://drive.google.com/file/d/1pMozr5tb7VE-l4TPp2-GWjwP6Id3_tbT/view?usp=sharing
+
+
+https://drive.google.com/file/d/1pMozr5tb7VE-l4TPp2-GWjwP6Id3_tbT/view?usp=sharing
+
+
+
 https://drive.google.com/file/d/1VKsJt-t11Ct3WOn52dj1Lpc0LNyvqRiv/view?usp=sharing
 wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1VKsJt-t11Ct3WOn52dj1Lpc0LNyvqRiv' -O FILENAME
+
+
 
 
 
